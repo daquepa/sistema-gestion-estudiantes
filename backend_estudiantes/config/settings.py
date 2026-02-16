@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*-9c!f0c=9y-^!8^b!c-bqc5tewu8@e^%)4gfvcj14n=7onx@6'
+SECRET_KEY = 'django-insecure-b6^-r=!kgp0-&yfx&_!s)uxqnbmg0g%b5r)q#745xoj2w_00nf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,21 +31,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
     'django.contrib.admin',
+    'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+
 
     'strawberry.django',
-    # 'graphene_django',
-    'personas',
+    'estudiantes',
 ]
 
+
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # <--- Debe ser el primero o segundo
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,13 +83,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bd_personas',
+        'NAME': 'colegio_db',
         'USER': 'postgres',
         'PASSWORD': '1a2a3e4a5e',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -125,22 +128,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# settings.py
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
-
-# Añade esto para Strawberry y Django 4.x/5.x
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
-
-# Permite el envío de headers como Content-Type
+CORS_ALLOW_ALL_ORIGINS = True  # Ya lo deberías tener
 CORS_ALLOW_CREDENTIALS = True
-# Busca o añade esta sección
-# GRAPHENE = {
-#     'SCHEMA': 'config.schema.schema' # Cambia 'config' por el nombre de tu carpeta de proyecto
-# }
+
+# Permite que Apollo envíe encabezados estándar
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
